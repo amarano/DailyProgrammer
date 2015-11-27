@@ -12,7 +12,7 @@ let rec parse (times:list<string>) (schedules:list<ProgramSchedule>) =
     | [_] -> 
         failwith "The input is not in the correct format"
 
-let parse (s:string) = 
+let parseString (s:string) = 
     parse (s.Split(' ') |> List.ofSeq) []
 
 let rec addToSchedule (scheduleSoFar:list<ProgramSchedule>) (possiblePrograms:list<ProgramSchedule>) (currentlyRecording:ProgramSchedule) = 
@@ -26,8 +26,10 @@ let rec addToSchedule (scheduleSoFar:list<ProgramSchedule>) (possiblePrograms:li
         else
             addToSchedule scheduleSoFar tail currentlyRecording
 
-let schedule (programs:seq<ProgramSchedule>) = 
-    let sorted = programs |> Seq.sortBy (fun x -> x.StartTime)
+let schedule (programs:list<ProgramSchedule>) = 
+
+    let schedules = [for i in 0..programs.Length - 1 do yield addToSchedule [] (programs |> List.skip (i + 1) ) programs.[i]]
+    schedules |> List.maxBy (fun l -> l.Length)
 
 
 
