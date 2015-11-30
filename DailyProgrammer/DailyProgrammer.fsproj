@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="VhsRecording.fs" />
+    <Compile Include="Rummikub.fs" />
     <Compile Include="Program.fs" />
     <None Include="App.config" />
   </ItemGroup>
